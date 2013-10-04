@@ -1,1 +1,0 @@
-/usr/local/bin/ios-sim $1 $2 ${@:4}
