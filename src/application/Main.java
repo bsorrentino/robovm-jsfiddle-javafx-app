@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -39,8 +40,14 @@ public class Main extends Application {
 	public void startWithFXML(Stage primaryStage) throws IOException {
 		
 			java.net.URL url = getClass().getClassLoader().getResource("application/MainScene.fxml");
-			Parent root = FXMLLoader.load(url);
 
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(url);
+			loader.setBuilderFactory( new JavaFXBuilderFactory());
+			Parent root = (Parent) loader.load( url.openStream() );
+
+			MainController controller = loader.getController();
+			
 	        Scene scene = new Scene(root, 300, 275);
 	    
 	        primaryStage.setTitle("FXML Welcome");
