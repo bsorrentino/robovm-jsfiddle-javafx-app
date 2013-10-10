@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,8 +20,13 @@ import javafx.util.Callback;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.robovm.cocoatouch.foundation.NSURL;
+import org.robovm.cocoatouch.uikit.UIApplication;
 
-public class MainController implements Initializable {
+import screensframework.ControlledScreen;
+import screensframework.ScreensController;
+
+public class MainController implements Initializable, ControlledScreen {
 	final java.net.URL fxUrl = getClass().getClassLoader().getResource("application/DefaultListCell.fxml");
 
 	@FXML private ListView<JSONObject> fxList;
@@ -79,7 +86,30 @@ public class MainController implements Initializable {
 		
 		try {
 
+		    fxList.setCellFactory(new Callback<ListView<JSONObject>, ListCell<JSONObject>>() {
+		        @Override
+		        public ListCell<JSONObject> call(ListView<JSONObject> param) {
+		            return new ItemCell();
+		        }
+		    });
 			
+		    fxList.getSelectionModel().selectedItemProperty().addListener(
+		              new ChangeListener<JSONObject>() {
+		                  public void changed(ObservableValue<? extends JSONObject> ov, 
+		                		  JSONObject old_val, JSONObject new_val) {
+		                	  System.err.println( "select item");
+		                	  
+		                	  //parentController.setScreen( Main.SCREEN_FIDDLE_PREVIEW );
+		                	  
+		                	  
+		                	  try {
+								UIApplication.getSharedApplication().openURL( new NSURL(new_val.getString("url").concat("show")));
+							} catch (JSONException e) {
+								e.printStackTrace(System.err);
+							}
+		              }
+		          });
+		   			
 			final java.net.URL jsFiddleUrl = new java.net.URL("http://jsfiddle.net/api/user/bsorrentino/demo/list.json");
 			
 			final java.io.InputStream is = jsFiddleUrl.openStream();
@@ -109,17 +139,18 @@ public class MainController implements Initializable {
 				items.add( item );
 			}
 			
-		    fxList.setCellFactory(new Callback<ListView<JSONObject>, ListCell<JSONObject>>() {
-		        @Override
-		        public ListCell<JSONObject> call(ListView<JSONObject> param) {
-		            return new ItemCell();
-		        }
-		    });
-			
 
 		} catch (Exception e) {
 			e.printStackTrace(System.err);
 		}
+	}
+
+	private ScreensController parentController;
+	
+	@Override
+	public void setScreenParent(ScreensController screenPage) {
+		parentController = screenPage;
+		
 	}
 
 }

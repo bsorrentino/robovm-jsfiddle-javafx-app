@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,9 +15,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import screensframework.ScreensController;
+import screensframework.ScreensFramework;
 
 public class Main extends Application {
 	
+	public static final String SCREEN_FIDDLE_PREVIEW = "FiddlePreview";
+	public static final String SCREEN_MAIN_SCENE = "MainScene";
+
 	@Override
 	public void init() throws Exception {
 		super.init();
@@ -31,12 +37,30 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-		startWithFXML(primaryStage);
+		startWithScreensController(primaryStage);
+		//startWithFXML(primaryStage);
 		//startByCode(primaryStage);
 	}
 
 
 
+	
+	public void startWithScreensController(Stage primaryStage) throws IOException {
+		
+        ScreensController mainContainer = new ScreensController();
+        mainContainer.loadScreen(SCREEN_MAIN_SCENE, "application/MainScene.fxml");
+        mainContainer.loadScreen(SCREEN_FIDDLE_PREVIEW, "application/FiddlePreview.fxml");
+        
+        mainContainer.setScreen(SCREEN_MAIN_SCENE);
+        
+        Group root = new Group();
+        root.getChildren().addAll(mainContainer);
+        Scene scene = new Scene(root, 300, 275);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+	}
+	
 	public void startWithFXML(Stage primaryStage) throws IOException {
 		
 			java.net.URL url = getClass().getClassLoader().getResource("application/MainScene.fxml");

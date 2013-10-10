@@ -4,6 +4,7 @@ import javafx.application.Application;
 
 import org.robovm.cocoatouch.foundation.NSAutoreleasePool;
 import org.robovm.cocoatouch.foundation.NSDictionary;
+import org.robovm.cocoatouch.foundation.NSURL;
 import org.robovm.cocoatouch.uikit.UIApplication;
 import org.robovm.cocoatouch.uikit.UIApplicationDelegate;
 
@@ -23,6 +24,7 @@ public class RoboVMJFXLauncher extends UIApplicationDelegate.Adapter {
 
         return true;
     }
+    
 
     public static void main(String[] args) throws Exception {
         System.setProperty("glass.platform", "ios");

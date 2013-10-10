@@ -44,7 +44,7 @@
           <includeJFX>true</includeJFX>
           
           <forceLinkClasses>
-          	<forceLinkClass>application.MainController</forceLinkClass>
+          	<pattern>application.*Controller</pattern>
           	<forceLinkClass>com.sun.scenario.effect.impl.prism.ps.PPSRenderer</forceLinkClass>
           	<forceLinkClass>com.sun.scenario.effect.impl.prism.sw.PSWRenderer</forceLinkClass>
           	<pattern>com.ctc.wstx.stax.WstxInputFactory</pattern>
@@ -102,10 +102,9 @@
         <artifactId>maven-scm-plugin</artifactId>
         <version>1.8.1</version>
         <configuration>
-        	<checkoutDirectory>${project.build.sourceDirectory}</checkoutDirectory>
+        	<checkoutDirectory>${project.build.directory}</checkoutDirectory>
           <connectionType>connection</connectionType>
        <connectionUrl>scm:git:https://github.com/acaicedo/JFX-MultiScreen.git</connectionUrl>
-       	<includes>ControlledScreen.java,ScreensController.java</includes>
         </configuration>
         <executions>
         	<execution>
