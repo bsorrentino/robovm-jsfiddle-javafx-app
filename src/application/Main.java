@@ -16,7 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import screensframework.ScreensController;
-import screensframework.ScreensFramework;
 
 public class Main extends Application {
 	
@@ -71,6 +70,7 @@ public class Main extends Application {
 			Parent root = (Parent) loader.load( url.openStream() );
 
 			MainController controller = loader.getController();
+			controller.setScreenParent(null);
 			
 	        Scene scene = new Scene(root, 300, 275);
 	    

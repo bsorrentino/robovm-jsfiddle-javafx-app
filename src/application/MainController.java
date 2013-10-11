@@ -20,8 +20,10 @@ import javafx.util.Callback;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.robovm.cocoatouch.foundation.NSArray;
 import org.robovm.cocoatouch.foundation.NSURL;
 import org.robovm.cocoatouch.uikit.UIApplication;
+import org.robovm.cocoatouch.uikit.UIWindow;
 
 import screensframework.ControlledScreen;
 import screensframework.ScreensController;
@@ -79,7 +81,7 @@ public class MainController implements Initializable, ControlledScreen {
 	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-
+			
 		final ObservableList<JSONObject> items = FXCollections.observableArrayList (); // ("Single", "Double", "Suite", "Family App");
 		fxList.setItems(items);
 		
@@ -101,12 +103,15 @@ public class MainController implements Initializable, ControlledScreen {
 		                	  
 		                	  //parentController.setScreen( Main.SCREEN_FIDDLE_PREVIEW );
 		                	  
-		                	  
+		              		// --> START COCOACODE
+  
 		                	  try {
 								UIApplication.getSharedApplication().openURL( new NSURL(new_val.getString("url").concat("show")));
 							} catch (JSONException e) {
 								e.printStackTrace(System.err);
 							}
+		              		// <-- END COCOACODE
+  
 		              }
 		          });
 		   			
