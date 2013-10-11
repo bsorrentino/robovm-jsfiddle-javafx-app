@@ -2,6 +2,9 @@ package application;
 	
 import java.io.IOException;
 
+import org.robovm.cocoatouch.foundation.NSNumber;
+
+import application.notification.NotificationController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,6 +25,8 @@ public class Main extends Application {
 	public static final String SCREEN_FIDDLE_PREVIEW = "FiddlePreview";
 	public static final String SCREEN_MAIN_SCENE = "MainScene";
 
+	public static final NotificationController notificationCenter = new NotificationController();
+	
 	@Override
 	public void init() throws Exception {
 		super.init();
@@ -35,8 +40,9 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
-		startWithScreensController(primaryStage);
+
+        
+        startWithScreensController(primaryStage);
 		//startWithFXML(primaryStage);
 		//startByCode(primaryStage);
 	}
@@ -46,7 +52,8 @@ public class Main extends Application {
 	
 	public void startWithScreensController(Stage primaryStage) throws IOException {
 		
-        ScreensController mainContainer = new ScreensController();
+        ScreensController mainContainer = new ScreensController(primaryStage);
+        
         mainContainer.loadScreen(SCREEN_MAIN_SCENE, "application/MainScene.fxml");
         mainContainer.loadScreen(SCREEN_FIDDLE_PREVIEW, "application/FiddlePreview.fxml");
         

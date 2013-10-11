@@ -41,6 +41,7 @@
 package screensframework;
 
 import java.util.HashMap;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -51,6 +52,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
@@ -61,12 +63,19 @@ public class ScreensController  extends StackPane {
     //Holds the screens to be displayed
 
     private HashMap<String, Node> screens = new HashMap<>();
+    private final Stage primaryStage;
     
-    public ScreensController() {
-        super();
-    }
 
-    //Add the screen to the collection
+    public ScreensController(Stage primaryScene) {
+		super();
+		this.primaryStage = primaryScene;
+	}
+
+	public Stage getPrimaryStage() {
+		return primaryStage;
+	}
+
+	//Add the screen to the collection
     public void addScreen(String name, Node screen) {
         screens.put(name, screen);
     }

@@ -45,11 +45,26 @@
           
           <forceLinkClasses>
           	<pattern>application.*Controller</pattern>
-          	<forceLinkClass>com.sun.scenario.effect.impl.prism.ps.PPSRenderer</forceLinkClass>
-          	<forceLinkClass>com.sun.scenario.effect.impl.prism.sw.PSWRenderer</forceLinkClass>
+          	
+          	<!--  SSL -->
+			<pattern>org.apache.harmony.xnet.provider.jsse.OpenSSLProvider</pattern>
+			<pattern>org.apache.harmony.xnet.provider.jsse.JSSEProvider</pattern>
+			<pattern>org.apache.harmony.xnet.provider.jsse.OpenSSLMessageDigestJDK*</pattern>
+			<pattern>com.android.org.bouncycastle.jce.provider.BouncyCastleProvider</pattern>
+			<pattern>com.android.org.bouncycastle.jce.provider.JDKKeyStore</pattern>
+			<pattern>org.apache.harmony.security.provider.crypto.CryptoProvider</pattern>
+			<pattern>org.apache.harmony.security.provider.cert.DRLCertFactory</pattern>
+			<pattern>org.apache.harmony.security.provider.cert.X509CertFactoryImpl</pattern>			
+			<pattern>com.android.org.bouncycastle.jce.provider.PKIXCertPathValidatorSpi</pattern>
+			<!-- FXML -->         	
           	<pattern>com.ctc.wstx.stax.WstxInputFactory</pattern>
+          	
+			<!-- JAVAFX -->         	      	
           	<pattern>javafx.*.**</pattern>
           	<pattern>sun.reflect.misc.Trampoline</pattern>
+          	<forceLinkClass>com.sun.scenario.effect.impl.prism.ps.PPSRenderer</forceLinkClass>
+          	<forceLinkClass>com.sun.scenario.effect.impl.prism.sw.PSWRenderer</forceLinkClass>
+          	
           </forceLinkClasses>
         </configuration>
       </plugin>
@@ -88,6 +103,11 @@
             <version>4.2.0</version>
       </dependency>
     
+		<dependency>
+		  <groupId>com.dropbox.core</groupId>
+		  <artifactId>dropbox-core-sdk</artifactId>
+		  <version>[1.7,1.8)</version>
+		</dependency>    
   </dependencies>
   
   <profiles>
